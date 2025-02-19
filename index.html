@@ -61,7 +61,7 @@
 
         #features {
             top: 0;
-            height: 100px;
+            height: 125px;
             margin-top: 20px;
             width: 250px;
         }
@@ -70,7 +70,7 @@
             padding: 10px;
             box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
             line-height: 18px;
-            height: 210px;
+            height: 200px;
             margin-bottom: 40px;
             width: 150px;
         }
@@ -113,7 +113,7 @@
         // load data and add as layer
         async function geojsonFetch() {
             let response = await fetch('assets/wa-covid-data.geojson');
-            let state_data = await response.json();
+            let waCovidData = await response.json();
 
             map.on('load', function loadingData() {
                 map.addSource('wa-covid-data', {
@@ -130,19 +130,19 @@
                             'step',
                             ['get', 'casePer10k'],
                             '#FFEDA0',   // stop_output_0
-                            10,          // stop_input_0
+                            250,          // stop_input_0
                             '#FED976',   // stop_output_1
-                            20,          // stop_input_1
+                            500,          // stop_input_1
                             '#FEB24C',   // stop_output_2
-                            50,          // stop_input_2
+                            750,          // stop_input_2
                             '#FD8D3C',   // stop_output_3
-                            100,         // stop_input_3
+                            1000,         // stop_input_3
                             '#FC4E2A',   // stop_output_4
-                            200,         // stop_input_4
+                            1250,         // stop_input_4
                             '#E31A1C',   // stop_output_5
-                            500,         // stop_input_5
+                            1500,         // stop_input_5
                             '#BD0026',   // stop_output_6
-                            1000,        // stop_input_6
+                            1750,        // stop_input_6
                             "#800026"    // stop_output_7
                         ],
                         'fill-outline-color': '#BBBBBB',
@@ -151,14 +151,14 @@
                 });
 
                 const layers = [
-                    '0-9',
-                    '10-19',
-                    '20-49',
-                    '50-99',
-                    '100-199',
-                    '200-499',
-                    '500-999',
-                    '1000 and more'
+                    '0-249',
+                    '250-499',
+                    '500-749',
+                    '750-999',
+                    '1000-1249',
+                    '1250-1499',
+                    '1500-1749',
+                    '1750+'
                 ];
                 const colors = [
                     '#FFEDA070',
@@ -173,7 +173,7 @@
 
                 // create legend
                 const legend = document.getElementById('legend');
-                legend.innerHTML = "<b>Population Density<br>(people/sq.mi.)</b><br><br>";
+                legend.innerHTML = "<b>Covid Cases<br>per 10,000 people</b><br><br>";
 
 
                 layers.forEach((layer, i) => {
